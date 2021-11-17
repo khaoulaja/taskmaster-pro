@@ -167,18 +167,6 @@ $(".card .list-group").sortable({
   scroll: false,
   tolerance: "pointer",
   helper:"clone",
-  activate: function (event) {
-    console.log("activate",this);
-  },
-  deactivate: function (event) {
-    console.log("deactivate",this);
-  },
-  over: function (event) {
-    console.log("over",event.target);
-  },
-  out: function (event) {
-    console.log("out",event.target);
-  },
   update: function (event) {
     var tempArr = [];
 // loop over current set of children in sortable list
@@ -203,7 +191,7 @@ $(this).children().each(function() {
 var arrName = $(this).attr("id").replace("list-","");
   tasks[arrName]= tempArr;
   saveTasks();
-console.log(tempArr);
+
   }
 });
 
@@ -213,14 +201,12 @@ accept:".card .list-group-item",
 tolerance: "touch",
 drop:function (event,ui) {
   ui.draggable.remove();
-},
-over: function (event) {
-  console.log("over");
-},
-out:function (event) {
-  console.log("out");
 }
 });
 
-
-console.log(moment("05-02-1997", "MM-DD-YYYY").format("dddd MMM Do YYYY"));
+setInterval(function () {
+  $(".card .list-group-item").each(function (index,el) {
+    auditTask(el);
+    
+  })
+},1000*60*30);
